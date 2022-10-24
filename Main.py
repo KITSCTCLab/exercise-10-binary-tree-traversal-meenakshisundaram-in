@@ -6,38 +6,44 @@ class BinaryTreeNode:
 
 
 def insert(root, new_value) -> BinaryTreeNode:
-     if(root==None):
-        newnode = BinaryTreeNode(key)
-        root = newnode
-        
-     elif(new_value<root.data):
-         root.left = insert(root.left,new_value)
-        
-     else:
-         root.right = insert(root.right,new_value)
-     
-     return root
-    
+    if (root == None):
+        root = BinaryTreeNode(new_value)
+        return root
+    else:
+        if root.data > new_value:
+            if root.left_child is None:
+                new_node = BinaryTreeNode(new_value)
+                root.left_child = new_node
+            else:
+                insert(root.left_child,new_value)
+
+        else:
+            if root.right_child is None:
+                new_node = BinaryTreeNode(new_value)
+                root.right_child = new_node
+            else:
+                insert(root.right_child,new_value)
+
 def inorder(root) -> None:
-    if (root and root.left):
-        inorder(root.left)
-    
-    elif(root.left==None):
-        print(root.data)
-    
-    elif(root.right==None):
-        
+    if root:
+        inorder(root.left_child)
+        print(root.data, end = " ")
+        inorder(root.right_child)
 
 
 def preorder(root) -> None:
-    # Write your code here
+    if root:
+        print(root.data, end = " ")
+        preorder(root.left_child)
+        preorder(root.right_child)
 
 
 def postorder(root) -> None:
-    # Write your code here
+    if root:
+        postorder(root.left_child)
+        postorder(root.right_child)
+        print(root.data, end = " ")
 
-
-# Do not change the following code
 input_data = input()
 flag = True
 root = None
